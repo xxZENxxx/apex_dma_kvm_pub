@@ -1,3 +1,6 @@
+#ifndef MEMORY_HPP
+#define MEMORY_HPP
+
 #include "memflow.hpp"
 #include <cstdint>
 #include <cstring>
@@ -19,30 +22,38 @@ typedef unsigned long DWORD;
 typedef unsigned short WORD;
 typedef WORD *PWORD;
 
-static ConnectorInstance<> *conn = 0;
+static ConnectorInstance<> *conn = nullptr;
 
-// Cache structure
-struct CacheEntry {
-    uintptr_t address; // Address of the page table entry
-    MMPTE value;       // Page table entry value
-    bool valid;       // Indicates if the cache entry is valid
+inline bool isMatch(const PBYTE addr, const PBYTE pat, const PBYTE msk) {
+    size_t n = 0;
+    while (addr[n] == pat[n] || msk[n] == (BYTE)'?') {
+        if (!msk[++n]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+size_t findPattern(const PBYTE rangeStart, size_t len, const char *pattern);
+
+struct Process {
+    ProcessInstance<> hProcess;
+    uint64_t baseaddr = 0;
 };
 
-class Memory
-{
+enum class process_status : BYTE {
+    NOT_FOUND,
+    FOUND_NO_ACCESS,
+    FOUND_READY
+};
+
+class Memory {
 private:
     Inventory *inventory;
     OsInstance<> os;
     Process proc;
     process_status status = process_status::NOT_FOUND;
     std::mutex m;
-
-    // Caches for page tables
-    static const int CACHE_SIZE = 512; // Size of the cache
-    CacheEntry cached_pml4e[CACHE_SIZE]; // PML4E cache
-    CacheEntry cached_pdpte[CACHE_SIZE];  // PDPT cache
-    CacheEntry cached_pde[CACHE_SIZE];     // PDE cache
-    CacheEntry cached_pte[CACHE_SIZE];     // PTE cache
 
 public:
     Memory();
@@ -67,33 +78,45 @@ public:
     template <typename T>
     bool WriteArray(uint64_t address, const T value[], size_t len);
 
-    uint64_t ScanPointer(uint64_t ptr_address, const uint32_t offsets[], int level);
-
-   
-    bool getCachedPML4E(uint64_t address, MMPTE &outValue);
-    void setCachedPML4E(uint64_t address, const MMPTE &value);
-
-
+    uint64_t ScanPointer(uint64_t ptr_address, const uint32_t offsets[]);
 };
 
-
-inline bool Memory::getCachedPML4E(uint64_t address, MMPTE &outValue) {
-    size_t index = (address >> 39) & 0x1FF; // Calculate index for PML4E
-    if (cached_pml4e[index].address == address && cached_pml4e[index].valid) {
-        outValue = cached_pml4e[index].value; // Return cached value
-        return true;
-    }
-    return false; // Not found in cache
+template <typename T>
+bool Memory::Read(uint64_t address, T &out) {
+    std::lock_guard<std::mutex> l(m);
+    return proc.baseaddr &&
+           proc.hProcess.read_raw_into(
+               address, CSliceMut<uint8_t>((char *)&out, sizeof(T))) == 0;
 }
 
-inline void Memory::setCachedPML4E(uint64_t address, const MMPTE &value) {
-    size_t index = (address >> 39) & 0x1FF; // Calculate index for PML4E test
-    cached_pml4e[index].address = address;
-    cached_pml4e[index].value = value;
-    cached_pml4e[index].valid = true; // Mark as valid
+template <typename T>
+bool Memory::ReadArray(uint64_t address, T out[], size_t len) {
+    std::lock_guard<std::mutex> l(m);
+    return proc.baseaddr &&
+           proc.hProcess.read_raw_into(
+               address, CSliceMut<uint8_t>((char *)out, sizeof(T) * len)) == 0;
+}
+
+template <typename T>
+bool Memory::Write(uint64_t address, const T &value) {
+    std::lock_guard<std::mutex> l(m);
+    return proc.baseaddr &&
+           proc.hProcess.write_raw(
+               address, CSliceRef<uint8_t>((const char *)&value, sizeof(T))) == 0;
+}
+
+template <typename T>
+bool Memory::WriteArray(uint64_t address, const T value[], size_t len) {
+    std::lock_guard<std::mutex> l(m);
+    return proc.baseaddr &&
+           proc.hProcess.write_raw(
+               address,
+               CSliceRef<uint8_t>((const char *)value, sizeof(T) * len)) == 0;
 }
 
 bool check_exist();
 std::set<size_t> load_valid_dtbs();
 void append_valid_dtb(size_t dtb);
 bool IsInValid(uint64_t address);
+
+#endif // MEMORY_HPP
