@@ -222,39 +222,30 @@ bool IsInTriggerZone(WeaponXEntity &weapon, Vector localCameraPos, Entity &targe
     return is_triggerzone;
 }
 
-bool IsInCrossHair(Entity &target)
-{
-    static uint64_t last_t = 0;
-    static float last_crosshair_target_time = -1.f;
-    float now_crosshair_target_time = target.lastCrossHairTime();
-    bool is_trigger = false;
-    if (last_t == target.ptr)
-    {
-        if (last_crosshair_target_time != -1.f)
-        {
-            if (now_crosshair_target_time > last_crosshair_target_time)
-            {
-                is_trigger = true;
-                last_crosshair_target_time = -1.f;
-            }
-            else
-            {
-                is_trigger = false;
-                last_crosshair_target_time = now_crosshair_target_time;
-            }
-        }
-        else
-        {
-            is_trigger = false;
-            last_crosshair_target_time = now_crosshair_target_time;
-        }
-    }
-    else
-    {
-        last_t = target.ptr;
+bool IsInCrossHair(Entity &target) {
+  static uintptr_t last_t = 0;
+  static float last_crosshair_target_time = -1.f;
+  float now_crosshair_target_time = target.lastCrossHairTime();
+  bool is_in_cross_hair = false;
+  if (last_t == target.ptr) {
+    if (last_crosshair_target_time != -1.f) {
+      if (now_crosshair_target_time > last_crosshair_target_time) {
+        is_in_cross_hair = true;
+        // printf(xorstr_("Trigger\n"));
         last_crosshair_target_time = -1.f;
+      } else {
+        is_in_cross_hair = false;
+        last_crosshair_target_time = now_crosshair_target_time;
+      }
+    } else {
+      is_in_cross_hair = false;
+      last_crosshair_target_time = now_crosshair_target_time;
     }
-    return is_trigger;
+  } else {
+    last_t = target.ptr;
+    last_crosshair_target_time = -1.f;
+  }
+  return is_in_cross_hair;
 }
 
 void MapRadarTesting(uint64_t localptr)
