@@ -27,25 +27,6 @@
 
 <br />
 
-# Features
-
-- **Single/Double GPU Support**: Fully compatible with single and dual GPUs.
-- **Glow Customization**: Customize glow colors, highlight props, and track viewers for held weapons.
-- **Debugging Tools**: Firing Range for testing.
-- **Team-Specific Features**: Aimbot and Glow target only the opposing team.
-- **Customizable Hotkeys**: Toggle Aimbot/Glow, set trigger/flick keys.
-- **Glow Distance**: Fully customizable.
-- **Weapon Prediction**: Fine-tune prediction for better accuracy.
-- **Player Highlighting**: Highlight dangerous players for better awareness.
-- **Auto Features**: Auto Tactical Reload for seamless reloading.
-- **Sky Grenade**: Accurate grenade throws.
-- **Automatic Scripts**: Tapstrpe, Super Glide, Super Grapple.
-- **1 VS 1 Mode**: Peak showdown at the firing range.
-- **Performance Metrics**: Display real-time frame rate.
-- **ALGS Map**: F8 to activate in-game.
-- **Customizable Recoil Reduction**: If you don't use aimbot.
-- **Interactive Terminal Menu**: User-friendly interface for customization.
- 
 
 # Features
 
@@ -72,7 +53,8 @@
 
 We invite you to join our Discord community for more updates, support, and discussions!
 
-[Click here to join our Discord](https://discord.gg/wsA5HFvWpP)
+[![Join Our Discord](https://via.placeholder.com/600x100.png?text=Join+Our+Discord)](https://discord.gg/wsA5HFvWpP)
+
 
 
 
