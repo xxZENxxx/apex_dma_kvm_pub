@@ -27,170 +27,53 @@
 
 <br />
 
+# Features
 
+- **Single/Double GPU Support**: Fully compatible with single and dual GPUs.
+- **Glow Customization**: Customize glow colors, highlight props, and track viewers for held weapons.
+- **Debugging Tools**: Firing Range for testing.
+- **Team-Specific Features**: Aimbot and Glow target only the opposing team.
+- **Customizable Hotkeys**: Toggle Aimbot/Glow, set trigger/flick keys.
+- **Glow Distance**: Fully customizable.
+- **Weapon Prediction**: Fine-tune prediction for better accuracy.
+- **Player Highlighting**: Highlight dangerous players for better awareness.
+- **Auto Features**: Auto Tactical Reload for seamless reloading.
+- **Sky Grenade**: Accurate grenade throws.
+- **Automatic Scripts**: Tapstrpe, Super Glide, Super Grapple.
+- **1 VS 1 Mode**: Peak showdown at the firing range.
+- **Performance Metrics**: Display real-time frame rate.
+- **ALGS Map**: F8 to activate in-game.
+- **Customizable Recoil Reduction**: If you don't use aimbot.
+- **Interactive Terminal Menu**: User-friendly interface for customization.
+ 
 
-## About The Project
-Apex Legends QEMU/KVM hack
+# Features
 
-UnknownCheats thread: https://www.unknowncheats.me/forum/apex-legends/406426-kvm-vmread-apex-esp-aimbot.html
+- **Single/Double GPU Support**: Fully compatible with single and dual GPUs.
+- **Glow Customization**: Customize glow colors, highlight props, and track viewers for held weapons.
+- **Debugging Tools**: Firing Range for testing.
+- **Team-Specific Features**: Aimbot and Glow target only the opposing team.
+- **Customizable Hotkeys**: Toggle Aimbot/Glow, set trigger/flick keys.
+- **Glow Distance**: Fully customizable.
+- **Weapon Prediction**: Fine-tune prediction for better accuracy.
+- **Player Highlighting**: Highlight dangerous players for better awareness.
+- **Auto Features**: Auto Tactical Reload for seamless reloading.
+- **Sky Grenade**: Accurate grenade throws.
+- **Automatic Scripts**: Tapstrpe, Super Glide, Super Grapple.
+- **1 VS 1 Mode**: Peak showdown at the firing range.
+- **Performance Metrics**: Display real-time frame rate.
+- **ALGS Map**: F8 to activate in-game.
+- **Customizable Recoil Reduction**: If you don't use aimbot.
+- **Interactive Terminal Menu**: User-friendly interface for customization.
 
-Bone IDs reference: https://www.unknowncheats.me/wiki/Apex_Legends_Bones_and_Hitboxes
+---
 
-Game version (Steam Only right now): v3.0.51.45
+# Join Our Discord Community
 
+We invite you to join our Discord community for more updates, support, and discussions!
 
+[Click here to join our Discord](https://discord.gg/wsA5HFvWpP)
 
-
- **Features**
-
-1. KrackerCo Fork's no-overlay features.
-
-    > This is the No Client(Windows) Branch, nothing is needed on the windows side.
-    >
-    > ESP Glow color picker for knocked and alive, visable or not visable.
-    >
-    > Item Glow with item filter.
-    >
-    > Weapon Glow with Weapon filter.
-    >
-    > Firing Range dummp targeting debug testing.
-    >
-    > TDM Aimbot/Glow so you only target the other team.
-    >
-    > Left/Right or both mouse buttons to aim.
-
-2. KrackerCo Fork's Client features.
-
-    > ESP Glow color picker for knocked and alive, visable or not visable.
-    >
-    > Item Glow with item filter.
-    >
-    > Weapon Glow with Weapon filter.
-    >
-    > Mini-Map radar*1.
-    >
-    > Full map radar*2.
-    >
-    > Firing Range dummp targeting debug testing.
-    >
-    > TDM Aimbot/Glow so you only target the other team.
-    >
-    > Custom aiming distance.
-    >
-    > Left/Right or both mouse buttons to aim.
-    >
-    > Custom Predition speed and Gravity to use with Headshot Mode*3.
-    >
-    > Save and Load config buttons and at s
-
-3. chettoy Fork's features
-
-    * Inherits all features from KrackerCo's original no-overlay branch.
-    * Includes all features from the original repository's overlay branch. (requires overlay enabled)
-    * Optional glow box to replace player glow (ideal for screenshot prevention or live broadcasting). (requires overlay enabled)
-    * Sky Grenade feature.
-    * Improved target locking.
-    * Advanced targeting options with various bone selection effects.
-    * Calculate and display the game's frame rate.
-    * Aiming Target Indicator (requires overlay enabled)
-    * Config file editing and saving capabilities.
-    * Interactive terminal menu for user-friendly customization.
-    * Dynamic color changes indicate target armor status.
-    * Highlight favorite gamers for quick identification.
-    * Weapon model glow and spectated indicator.
-    * Utilize keyboard backlight to display the number of spectators (requires D-Bus support).
-    * Multilingual support for global accessibility.
-
-
-
-Please star if you like it.
-Look forward to your testing and feedback.
-
-## Update OFFSETS
-1. Make sure you have properly formatted offsets.h and offsets.ini.
-2. Run the python script like this.
-    ```shell
-    py update.py offsets.h offsets.ini
-    ```
-
-## Getting Started
-
-There are really only two steps:
-
-1. Run the game on a windows guest in a kvm virtual machine.
-2. Run the compiled apex_dma program on the Linux host.
-    ```shell
-    sudo ./apex_dma
-    ```
-
-
-
-Additional information:
-
-
-1. Please put the overlay window on the top of the VM screen after start. For example, on top of the looking-glass window.
-2. The window can't get the focus at the same time with the VM screen,  please passthrough some keyboard, mouse or joystick into the VM,  otherwise you can't operate the game.
-3. Press insert key on the overlay window to open the overlay menu.
-4. If you are using a resolution other than 1080p, save the configuration and then modify the `screen_width` and `screen_height` in *settings.toml* and reload the configuration.
-
-
-
-Click on *[Actions](https://github.com/xxZENxxx/apex_dma_kvm_pub/actions)* to download the auto-built artifacts.
-
-Or compile it yourself.
-
-
-
-## Build from source
-
-**Requirements:**
-
-* C++ toolchain
-* Rust toolchain
-* CMake
-* Git
-
-**Install Rust:**
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-**Install Build Dependencies (Ubuntu):**
-
-```bash
-sudo apt install cmake clang libzstd-dev libglfw3-dev libfreetype6-dev libvulkan-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev wayland-protocols libwayland-dev libxkbcommon-dev
-```
-
-**Build:**
-
-```shell
-git clone --recurse https://github.com/Jotalz/apex_dma_kvm_pub
-cd apex_dma_kvm_pub
-git submodule update --init --recursive
-cd apex_dma
-bash ./build.sh
-```
-
-
-
-## FAQ
-
-1. Many people are using a single GPU
-
-    > If there is only one GPU and the linux host can't be displayed after  starting the VM, you can still use features other than the overlay in  such a case.
-    > You can even turn off the overlay and use it as a no-overlay version.
-    > In this case you will not be able to use only the overlay-dependent  features such as the mini-map radar, health shield bars, GUI menus,  spectator display, etc. But all the original features of the no-overlay  branch such as the player glow, text menu in terminal, and the new sky  grenade will still work.
-
-2. It seems that the client is still reading the values required for the esp stuff. If AC is looking for access on those specific memory locations, then IDK if just removing the implementation of the overlay will work in  terms of preventing detection. Or is AC simply detecting the presence of the overlay/client itself, and banning due to that?
-
-    > First of all, everything related to game state is realized by *access on those specific memory locations*. So we need to use DMA or VM techniques to access memory covertly.
-    > AC detects the overlay client, so we re-implement the overlay outside the VM and remove the client.
-
-3.  I feel the aimbot seem not good as KrackerCo's one
-
-    > We added a few new parameters to aimbot, if you turn auto bone off, turn no-recoil on (it's off by default now) and set the aimbot predict fps to 75, aimbot will run the same as it did before with the same smoothing values.
-    > If you want a natural game feel and normal behavior as if you don't use auto-aiming but dramatically increase the hit rate, instead of wanting to lock bullets at a single point, use auto bone and maybe turn off no-recoil.
 
 
 
