@@ -53,7 +53,7 @@
 
 We invite you to join our Discord community for more updates, support, and discussions!
 
-[![Join Our Discord](https://i.imgur.com/kGxtXb7.png)]([https://discord.gg/wsA5HFvWpP])
+[![Join Our Discord](https://i.imgur.com/kGxtXb7.png)](https://discord.gg/wsA5HFvWpP)
 
 
 
